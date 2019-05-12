@@ -1,0 +1,17 @@
+{
+    "name": "minnano-shokudou-order-kun",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "dependencies": {
+        "argparse": "1.0.10",
+        "fs-extra": "8.0.0",
+        "puppeteer": "1.15.0"
+    },
+    "devDependencies": {
+        "@types/argparse": "1.0.36",
+        "@types/fs-extra": "5.1.0",
+        "@types/puppeteer": "1.12.4",
+        "typescript": "3.4.5"
+    }
+}
