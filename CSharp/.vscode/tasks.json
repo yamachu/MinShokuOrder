@@ -5,21 +5,31 @@
             "label": "build",
             "command": "dotnet",
             "type": "process",
-            "args": ["build", "${workspaceFolder}/MinShokuOrder.csproj"],
+            "args": [
+                "build",
+                "${workspaceFolder}/MinShokuOrder.csproj"
+            ],
             "problemMatcher": "$tsc"
         },
         {
             "label": "publish",
             "command": "dotnet",
             "type": "process",
-            "args": ["publish", "${workspaceFolder}/MinShokuOrder.csproj"],
+            "args": [
+                "publish",
+                "${workspaceFolder}/MinShokuOrder.csproj"
+            ],
             "problemMatcher": "$tsc"
         },
         {
             "label": "watch",
             "command": "dotnet",
             "type": "process",
-            "args": ["watch", "run", "${workspaceFolder}/MinShokuOrder.csproj"],
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/MinShokuOrder.csproj"
+            ],
             "problemMatcher": "$tsc"
         }
     ]
