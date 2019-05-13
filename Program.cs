@@ -65,6 +65,9 @@ namespace MinShokuOrder
             var menus = await Task.WhenAll((await page.XPathAsync(Consts.Query.LIST_MENU_NAMES))
                 .Select(async v => await page.EvaluateFunctionAsync("elm => elm.innerText", new []{v}))
                 .Select(async v => (await v).ToString()));
+            var canReserves = await Task.WhenAll((await page.XPathAsync(Consts.Query.LIST_ORDER_BUTTONS))
+                .Select(async v => await page.EvaluateFunctionAsync("elm => elm.className", new []{v}))
+                .Select(async v => (await v).ToString().Contains("menu__btn--reserve")));
             var ordered = await Task.WhenAll((await page.XPathAsync(Consts.Query.LIST_ORDER_BUTTONS))
                 .Select(async v => await page.EvaluateFunctionAsync("elm => elm.className", new []{v}))
                 .Select(async v => (await v).ToString().Contains("menu__btn--cancel")));
@@ -77,7 +80,7 @@ namespace MinShokuOrder
 
             if (parsedOpt.Value.Verbose) foreach (var v in menuDetails) System.Console.WriteLine(v);
 
-            var willOrderIndex = ordered.Select((v, i) => new { v, i }).Where(v => !v.v).Select(v => v.i);
+            var willOrderIndex = canReserves.Select((v, i) => new { v, i }).Where(v => v.v).Select(v => v.i);
 
             foreach (var i in willOrderIndex) {
                 await Task.WhenAll(
