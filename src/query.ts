@@ -11,6 +11,8 @@ export const LIST_ORDER_BUTTON = (_: any, ...args: any[]) =>
     `//*[@id="top"]/div/main/div/ul[last()]/li[${
         args[0]
     }]/section/ul/li[1]/section/div/form/input[@name="commit"]`;
+export const LIST_ORDER_DEADLINE_BUTTON =
+    '//*[@id="top"]/div/main/div/ul[last()]/li[*]/section/ul/li[1]/section/div/button';
 
 export const DETAIL_ORDER_BUTTON =
     '//*[@id="top"]/div/main/div[1]/section/form/input[@name="commit"]';

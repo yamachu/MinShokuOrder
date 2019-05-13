@@ -9,6 +9,7 @@ import {
     LIST_MENU_NAMES,
     LIST_ORDER_BUTTONS,
     DETAIL_ORDER_BUTTON,
+    LIST_ORDER_DEADLINE_BUTTON,
 } from './query';
 import { LOGIN_URL, MENU_LIST_URL, CONFIRM_URL, ORDER_SUCCESS_URL } from './url';
 import { _dumpInfo } from './utils';
@@ -29,6 +30,7 @@ const main = async (args: ArgTypes) => {
 
     await page.goto(MENU_LIST_URL, { waitUntil: 'networkidle0' });
 
+    const notCancelableButtonExist = (await page.$x(LIST_ORDER_DEADLINE_BUTTON)).length !== 0;
     const dates = await Promise.all(
         (await page.$x(LIST_DATES))
             .map(async (v) => await page.evaluate((elm) => elm.innerText, v))
@@ -45,10 +47,10 @@ const main = async (args: ArgTypes) => {
             .map(async (v) => (await v).includes('menu__btn--cancel'))
     );
 
-    const menuDetails = dates.map((v, i) => ({
-        date: v,
-        menu: menus[i],
-        ordered: ordered[i],
+    const menuDetails = ordered.map((v, i) => ({
+        date: dates[i + (notCancelableButtonExist ? 1 : 0)],
+        menu: menus[i + (notCancelableButtonExist ? 1 : 0)],
+        ordered: v,
     }));
 
     dumpInfo(menuDetails);
